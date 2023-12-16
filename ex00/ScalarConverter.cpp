@@ -14,7 +14,7 @@ void ScalarConverter::intToOther(int nr)
 		c = nr;
 	else
 	{
-		if (nr < 0 || nr > 127)
+		if (nr < -128 || nr > 127)
 			possible = false;
 		c = 0;
 	}
@@ -49,7 +49,7 @@ void ScalarConverter::floatToOther(float nr)
 		i = static_cast<int>(nr);
 		if (i > 32 && i < 126)
 			c = static_cast<char>(nr);
-		else if (nr < 0 || nr > 127)
+		else if (nr < -128 || nr > 127)
 			possibleChar = false;
 	}
 
@@ -77,7 +77,7 @@ void ScalarConverter::doubleToOther(double nr)
 		i = static_cast<int>(nr);
 		if (i > 32 && i < 126)
 			c = static_cast<char>(nr);
-		else if (nr < 0 || nr > 127)
+		else if (nr < -128 || nr > 127)
 			possibleChar = false;
 	}
 	f = static_cast<float>(nr);
@@ -101,11 +101,11 @@ void ScalarConverter::printMessage(int i, char c, float f, double d, bool possib
 	else
 		std::cout << "int: " << i << std::endl;
 	std::cout << "float: " << f;
-	if (f == i && f < 1000000)
+	if (f == i && ((f < 1000000 && f >= 0) || (f > -1000000 && f <= 0)))
 		std::cout << ".0";
 	std::cout << "f\n";
 	std::cout << "double: " << d;
-	if (d == i && d < 1000000)
+	if (d == i && ((d < 1000000 && d >= 0) || (d > -1000000 && d <= 0)))
 		std::cout << ".0";
 	std::cout << std::endl;
 }
@@ -136,7 +136,8 @@ bool ScalarConverter::isFloat(char *string)
 	if (strchr(string, '.') && string[strlen(string) - 1] == 'f')
 	{
 		isIt = true;
-		if ((long long) atol(string) > MAXFLOAT || (long long) atol(string) < -MAXFLOAT)
+		std::cout << (long long) atol(string) << "\n";
+		if (strtod(string, 0) > MAXFLOAT || strtod(string, 0) < -MAXFLOAT)
 			isIt = false;
 	}
 	if (strcmp(string, "nanf") == 0)
