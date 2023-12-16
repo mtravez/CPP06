@@ -117,6 +117,11 @@ bool ScalarConverter::isDouble(char *string)
 	if (strchr(string, '.') && strchr(string, '.') == strrchr(string, '.'))
 	{
 		isIt = true;
+		char *str = strchr(string, '.');
+		int i = 0;
+		while (str[++i])
+			if (!isdigit(str[i]))
+				return false;
 		std::strtod(string, 0);
 		if (errno == ERANGE)
 			isIt = false;
@@ -136,6 +141,11 @@ bool ScalarConverter::isFloat(char *string)
 	if (strchr(string, '.') && string[strlen(string) - 1] == 'f')
 	{
 		isIt = true;
+		char *str = strchr(string, '.');
+		int i = 0;
+		while (str[++i] && i < strlen(str) - 1)
+			if (!isdigit(str[i]))
+				return false;
 		std::cout << (long long) atol(string) << "\n";
 		if (strtod(string, 0) > MAXFLOAT || strtod(string, 0) < -MAXFLOAT)
 			isIt = false;
