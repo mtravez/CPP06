@@ -7,7 +7,8 @@ int main()
 {
 	Base *hello = generate();
 
-	identify(hello);
+	Base *nothing = NULL;
+	identify(nothing);
 	identify(*hello);
 	delete(hello);
 	return 0;

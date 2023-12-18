@@ -142,7 +142,7 @@ bool ScalarConverter::isFloat(char *string)
 	{
 		isIt = true;
 		char *str = strchr(string, '.');
-		int i = 0;
+		unsigned long i = 0;
 		while (str[++i] && i < strlen(str) - 1)
 			if (!isdigit(str[i]))
 				return false;

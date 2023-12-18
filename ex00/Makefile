@@ -8,7 +8,7 @@ OBJ = $(SRC:%.cpp=$(OBJ_DIR)%.o)
 
 OBJ_DIR = obj/
 
-FLAGS = -Werror -Werror -Wall -std=c++98
+FLAGS = -Werror -Wextra -Wall -std=c++98
 
 PINK = \033[1;95m
 GREEN = \033[1;92m

@@ -2,7 +2,9 @@
 
 Serializer::Serializer() {}
 
-Serializer::Serializer(Serializer &serializer) {}
+Serializer::Serializer(Serializer &serializer) {
+	(void) serializer;
+}
 
 Serializer::~Serializer() {}
 
